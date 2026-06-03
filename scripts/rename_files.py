@@ -1,3 +1,6 @@
+"""
+Skript zum Umbenennen der Bilder im raw_data Ordner um so einheitliche Bezeichnungen zu erhalten
+"""
 import os
 from pathlib import Path
 
