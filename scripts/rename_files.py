@@ -7,16 +7,33 @@ from pathlib import Path
 # Pfad zum Ordner
 folder_path = r'C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\raw_data\negatives'
 
+
+def get_lastcount(name_class):
+    subfolder_path = r'C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\processed_data\images'
+    max_count = -1  # Falls keine passenden Dateien gefunden werden
+
+    for root, dirs, files in os.walk(subfolder_path):
+        for file in files:
+            # Prüfe, ob die Datei mit name_class_ beginnt und auf .jpg endet
+            if file.startswith(name_class + '_') and file.endswith('.jpg'):
+                # Extrahiere den Teil nach dem Unterstrich (ohne .jpg)
+                count_part = file[len(name_class) + 1 : -4]  # -4, um ".jpg" zu entfernen
+                if count_part.isdigit():  # Prüfe, ob es sich um eine Zahl handelt
+                    count = int(count_part)
+                    if count > max_count:
+                        max_count = count
+
+    return max_count
+
 def define_sub_folder():
 
-    # Parameter
+    """
+    Parameter:
+    Kategorien = [edge, other, similar, street] 
+    :return: Name der Kategorie, Bild Count Startpunkt
+    """
     name = input("Kategorie eingeben: ")
-
-    # Aktueller Stand Scooter = 588
-    # Aktueller Stand Street = 156
-    # Aktueller Stand other = 003
-    # Aktueller Stand edge = 001
-    # Aktueller Stand similar = 001
+    print(f"{get_lastcount(name)} Bilder in processed_data bereits abgelegt")
     count_start: int = int(input("Index angeben: "))
 
     return name, count_start
@@ -29,17 +46,26 @@ def rename_files_in_folder(folder_path):
     sub_folder = Path(folder_path) / name
     files = os.listdir(sub_folder)
 
-    # Filtere nur Dateien (keine Unterordner)
+    # Filtere nur Dateien
     files = [f for f in files if os.path.isfile(os.path.join(sub_folder, f))]
 
-    # Sortiere die Dateien alphabetisch (optional, falls gewünscht)
+    # Sortiere die Dateien alphabetisch
     files.sort()
 
     counter = count_start
 
     for filename in files:
+        if counter < 10:
+            s = f"{counter:03d}"
+
+        if 100 > counter >= 10:
+            s = f"{counter:03d}"
+
+        elif counter > 100:
+            s = f"{counter}"
+
         # Erstelle den neuen Dateinamen
-        new_name = f"{name}_{counter}"
+        new_name = f"{name}_{s}"
 
         # Extrahiere die Dateiendung der ursprünglichen Datei
         file_extension = os.path.splitext(filename)[1]

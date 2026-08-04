@@ -1,8 +1,10 @@
 """
-Skript zum Starten von labelme für die Erstellung von Bounding Boxes
+Skript zum Starten von labelme für die Erstellung einer Bounding Box
 
-In PowerShell um Skripte in der .venv zu starten:   powershell -ExecutionPolicy Bypass
-                                                    .\.venv\Scripts\Activate.ps1
+Bei Ausführung über die Powershell, sicherstellen das die .venv aktiv ist!
+***Debug-Bypass***___________________________________________________________________________
+PowerShell: Skripte in der .venv zu starten:    powershell -ExecutionPolicy Bypass
+                                                .\.venv\Scripts\Activate.ps1
 
 Funktionen:
 1. Virtuelle Umgebung aktivieren
@@ -13,69 +15,60 @@ Funktionen:
 import os
 import subprocess
 import sys
+from operator import truediv
 from pathlib import Path
 
 # ================== KONFIGURATION ==================
 # Pfade definieren
 BASE_DIR = Path("C:/Studium_KI_Programme/Photo_Projekt_Objekterkennung")
 VENV_PATH = BASE_DIR / ".venv"
-LABELME_PATH = VENV_PATH / "Scripts" / "labelme.exe"  # Windows-Pfad
+LABELME_PATH = VENV_PATH / "Scripts" / "labelme.exe"
 
-# Ordner für Bilder und Labels
-IMAGE_DIRS = {
-    "train": BASE_DIR / "processed_data" / "images" / "train" / "scooter",
-    "val": BASE_DIR / "processed_data" / "images" / "val" / "scooter",
-    "test": BASE_DIR / "processed_data" / "images" / "test" / "scooter"
-}
+# ================== HILFSFUNKTION ==================
+def check_environment(path_to_check: Path):
+    try:
+        if path_to_check.exists() and path_to_check.is_dir():
+            print("########_Environment exists_#######")
+            return True
+        elif path_to_check.exists() and path_to_check.is_file():
+            return True
 
-# ================== HILFSFUNKTIONEN ==================
-def check_environment():
-    """
-    Prüft, ob die virtuelle Umgebung und labelme existieren
-    """
-    # TODO: Implementierung
-    pass
+    except FileNotFoundError as e:
+        print(f"Pfad nicht gefunden__##__: {e}")
 
-def get_images_to_label():
-    """
-    Sammelt alle Bilder, die noch keine JSON-Labels haben
-    """
-    # TODO: Implementierung
-    pass
+    except PermissionError as e:
+        print(f"Berechtigungsfehler__##__: {e}")
 
-def start_labelme(image_path=None):
-    """
-    Startet labelme mit dem angegebenen Bild oder Ordner
-    """
-    # TODO: Implementierung
-    pass
+    except OSError as e:
+        print(f"OS Fehler__##__ {e}")
+
+    except Exception as e:
+        print(e)
 
 # ================== HAUPTPROGRAMM ==================
 def main():
-    """
-    Hauptfunktion zum Starten des Labeling-Prozesses
-    """
-    print("🚀 Starte Labeling-Prozess...")
+    print("####__Starte Labeling-Prozess...__####")
 
-    # 1. Umgebung prüfen
-    if not check_environment():
-        print("❌ Fehler: Umgebung nicht korrekt konfiguriert")
+    if not check_environment(BASE_DIR):
+        print("❌ Projektverzeichnis Fehler: Umgebung nicht korrekt konfiguriert")
         sys.exit(1)
 
-    # 2. Bilder zum Labeln ermitteln
-    images_to_label = get_images_to_label()
+    if not check_environment(VENV_PATH):
+        print("❌ Virtuelles Environment Fehler: Umgebung nicht korrekt konfiguriert")
+        sys.exit(1)
 
-    if not images_to_label:
-        print("✅ Alle Bilder sind bereits gelabelt!")
-        return
+    if not check_environment(LABELME_PATH):
+        print("❌ Labelme-Fehler: Datei nicht gefunden")
+        sys.exit(1)
 
-    print(f"📷 {len(images_to_label)} Bilder zum Labeln gefunden")
+    try:
+        os.chdir(BASE_DIR / "processed_data" / "images")
+        subprocess.run([str(LABELME_PATH)], check=True)
+        sys.exit(0)
 
-    # 3. labelme starten
-    # TODO: Entscheidung - einzelnes Bild oder ganzer Ordner?
-    start_labelme()
-
-    print("🎉 Labeling-Prozess gestartet!")
+    except subprocess.CalledProcessError as e:
+        print(e)
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

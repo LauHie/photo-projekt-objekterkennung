@@ -2,13 +2,19 @@
 ---------------
 Konvertierung von Json in die txt für yolo
 
-Format in der yolo: class_id center_x center_y width height
+Format in der label-Datei für YOLO: class_id, center_x, center_y, width, height
 ---------------
 """
 
 import json
 import os
 from pathlib import Path
+import sys
+
+sys.stdout.reconfigure(encoding='utf-8')
+YELLOW = "\033[33m"
+RESET = "\033[0m"
+RED = "\033[31m"
 
 sub_dirs = [
     "train/scooter",
@@ -23,12 +29,12 @@ class_to_id = {"scooter": 0}
 base_data_dir = "C:/Studium_KI_Programme/Photo_Projekt_Objekterkennung/processed_data/images"
 base_lables_dir = "C:/Studium_KI_Programme/Photo_Projekt_Objekterkennung/processed_data/lables"
 
-print("🚀 Starte Konvertierung von JSON zu YOLO-Format...")
+print(RED + "\U0001F4C1 \U000027A1 \U0001F4D1 Starte Konvertierung von JSON zu YOLO-Format..." + RESET)
 
-# Überprüfe, ob die Labels-Ordner existieren
+# Auflisten aus welchen Verzeichnissen die Lables konvertiert werden
 for subdir in sub_dirs:
     json_dir = Path(base_data_dir, subdir)
-    print(f"Dateien aus {subdir.upper()} werden konvertiert")
+    print(f"\U0001F4C4 Dateien aus {subdir.upper()} werden konvertiert")
 
     if not json_dir.exists():
         print(f"❌ Fehler: Verzeichnis nicht gefunden: {json_dir}")
@@ -75,6 +81,13 @@ def convert_in_yolo(json_file):
 
 for subdir in sub_dirs:
     json_dir = Path(base_data_dir, subdir)
-    print(f"Aktuelles Verzeichnis: {json_dir}")
+    print(YELLOW + f"\n\U0001F4C1\U0001F4C1\U0001F4C1 Aktuelles Verzeichnis: {json_dir}"+ RESET)
     for json_file in json_dir.glob("*.json"):
         convert_in_yolo(json_file)
+
+"""
+
+!!!!!!!!Script noch nihct fertig!!!!!!!!!!!!!
+
+
+"""
