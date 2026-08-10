@@ -3,7 +3,7 @@ import shutil
 from pathlib import Path
 import random
 
-# ================== CONFIGURATION ==================
+# ================== ORDNERPFADE ==================
 RAW_DATA = "C:/Studium_KI_Programme/Photo_Projekt_Objekterkennung/raw_data"
 PROCESSED_DATA = "C:/Studium_KI_Programme/Photo_Projekt_Objekterkennung/processed_data/images"
 
@@ -102,25 +102,23 @@ def copy_files_to_destination(files, destination_path):
         except Exception as e:
             print(f"❌ Fehler beim Kopieren von {file.name}: {e}")
 
-
 def process_images():
-    """Verarbeite alle Bilder gemäß den Anforderungen"""
-    print("🔍 Suche nach Bilddateien...")
+    print("Suche nach Bilddateien...")
 
     # Hole alle negativen Bilder nach Kategorien
     negative_files_by_category = get_image_files_by_category(RAW_DATA)
 
     # Zeige Anzahl der Bilder pro Kategorie
     for category, files in negative_files_by_category.items():
-        print(f"📊 Gefunden: {len(files)} {category} Bilder")
+        print(f"Gefunden: {len(files)} {category} Bilder")
 
     # Hole alle full_views Bilder
     full_view_files = get_full_view_files(RAW_DATA)
-    print(f"📊 Gefunden: {len(full_view_files)} full_views Bilder")
+    print(f"Gefunden: {len(full_view_files)} full_views Bilder")
 
     # Teile negative Bilder nach Kategorien
     if any(negative_files_by_category.values()):
-        print("🔄 Teile negative Bilder nach Kategorien...")
+        print("Teile negative Bilder nach Kategorien...")
         split_negative_files = split_files_by_category(negative_files_by_category, SPLIT_RATIOS)
 
         # Kopiere negative Bilder in die entsprechenden Ordner
@@ -130,13 +128,13 @@ def process_images():
             copy_files_to_destination(splits["test"], Path(PROCESSED_DATA) / "test" / "negatives" / category)
 
         # Zeige Zusammenfassung
-        print("✅ Negative Bilder verteilt:")
+        print("Negative Bilder verteilt:")
         for category, splits in split_negative_files.items():
             print(f"   {category}: Train={len(splits['train'])}, Val={len(splits['val'])}, Test={len(splits['test'])}")
 
     # Teile full_views Bilder
     if full_view_files:
-        print("🔄 Teile full_views Bilder...")
+        print("Teile full_views Bilder...")
         train_full, val_full, test_full = split_full_view_files(full_view_files, SPLIT_RATIOS)
 
         # Kopiere full_views Bilder in die entsprechenden Ordner
@@ -144,14 +142,14 @@ def process_images():
         copy_files_to_destination(val_full, Path(PROCESSED_DATA) / "val" / "scooter")
         copy_files_to_destination(test_full, Path(PROCESSED_DATA) / "test" / "scooter")
 
-        print(f"✅ Full_views Bilder verteilt: Train={len(train_full)}, Val={len(val_full)}, Test={len(test_full)}")
+        print(f"Full_views Bilder verteilt: Train={len(train_full)}, Val={len(val_full)}, Test={len(test_full)}")
 
 
 # ================== MAIN ==================
 if __name__ == "__main__":
-    print("🚀 Starte Datenverarbeitung...")
+    print(" Starte Datenverarbeitung...")
 
     # Wenn Bilder vorhanden sind, verarbeite sie
     process_images()
 
-    print("✅ Datenverarbeitung abgeschlossen!")
+    print(" Datenverarbeitung abgeschlossen!")

@@ -4,10 +4,10 @@ Skript zum Umbenennen der Bilder im raw_data Ordner um so einheitliche Bezeichnu
 import os
 from pathlib import Path
 
-# Pfad zum Ordner
-folder_path = r'C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\raw_data\negatives'
+# ================== ORDNERPFAD ==================
+FOLDER_PATH = r'C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\raw_data\negatives'
 
-
+# ================== FUNKTIONEN ==================
 def get_lastcount(name_class):
     subfolder_path = r'C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\processed_data\images'
     max_count = -1  # Falls keine passenden Dateien gefunden werden
@@ -30,7 +30,7 @@ def define_sub_folder():
     """
     Parameter:
     Kategorien = [edge, other, similar, street] 
-    :return: Name der Kategorie, Bild Count Startpunkt
+    :return: Name der Kategorie, Bild-Count Startpunkt
     """
     name = input("Kategorie eingeben: ")
     print(f"{get_lastcount(name)} Bilder in processed_data bereits abgelegt")
@@ -82,8 +82,7 @@ def rename_files_in_folder(folder_path):
         # Erhöhe den Zähler
         counter += 1
 
-def main():
-    rename_files_in_folder(folder_path)
 
+# ================== MAIN ==================
 if __name__ == "__main__":
-    main()
+    rename_files_in_folder(FOLDER_PATH)

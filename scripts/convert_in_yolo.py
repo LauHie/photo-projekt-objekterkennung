@@ -1,6 +1,6 @@
 """
 ---------------
-Konvertierung von Json in die txt für yolo
+Konvertierung von Json in die .txt für yolo
 
 Format in der label-Datei für YOLO: class_id, center_x, center_y, width, height
 ---------------
@@ -11,35 +11,35 @@ import os
 from pathlib import Path
 import sys
 
+# ================== KONFIGURATION ==================
 sys.stdout.reconfigure(encoding='utf-8')
 YELLOW = "\033[33m"
 RESET = "\033[0m"
 RED = "\033[31m"
 
-sub_dirs = [
+SUBFOLDER_PATH = [
     "train/scooter",
     "test/scooter",
     "val/scooter"
 ]
 
 # Nur eine Klasse
-class_to_id = {"scooter": 0}
+CLASS_TO_ID = {"scooter": 0}
 
 # Basis-Ordner für die Daten
-base_data_dir = "C:/Studium_KI_Programme/Photo_Projekt_Objekterkennung/processed_data/images"
-base_lables_dir = "C:/Studium_KI_Programme/Photo_Projekt_Objekterkennung/processed_data/lables"
+BASE_DATA_DIR = Path("C:/Studium_KI_Programme/Photo_Projekt_Objekterkennung/processed_data/images")
+BASE_LABELS_DIR = Path("C:/Studium_KI_Programme/Photo_Projekt_Objekterkennung/processed_data/labels")
 
-print(RED + "\U0001F4C1 \U000027A1 \U0001F4D1 Starte Konvertierung von JSON zu YOLO-Format..." + RESET)
+# ================== FUNKTIONEN ==================
+def list_folder(sub_dirs,base_dir):
+    for sub_dir in sub_dirs:
+        json_dir = Path(base_dir, sub_dir)
+        print(f"\U0001F4C4 Dateien aus {sub_dir.upper()} werden konvertiert")
 
-# Auflisten aus welchen Verzeichnissen die Lables konvertiert werden
-for subdir in sub_dirs:
-    json_dir = Path(base_data_dir, subdir)
-    print(f"\U0001F4C4 Dateien aus {subdir.upper()} werden konvertiert")
+        if not json_dir.exists():
+            print(f"####_Fehler: Verzeichnis nicht gefunden: {json_dir}")
 
-    if not json_dir.exists():
-        print(f"❌ Fehler: Verzeichnis nicht gefunden: {json_dir}")
-
-def convert_in_yolo(json_file):
+def convert_in_yolo(json_file, class_to_id: dict[str, int]):
     try:
         with open(json_file, 'r', encoding='utf-8') as file:
             daten = json.load(file)
@@ -67,10 +67,9 @@ def convert_in_yolo(json_file):
 
                     if "label" in shapes_dict:
                         label = shapes_dict["label"]
-                        yolo_sting = f"{class_to_id[label]} {x_center:.8f} {y_center:.8f} {width_box:.8f} {height_box:.8f}"
-                        print(f"Bild: {name}\nYOLO Format: {yolo_sting}")
+                        yolo_string = f"{class_to_id[label]} {x_center:.8f} {y_center:.8f} {width_box:.8f} {height_box:.8f}"
 
-                    return yolo_sting
+                        return name, yolo_string
 
     except FileNotFoundError:
         print("Datei nicht gefunden.")
@@ -79,15 +78,36 @@ def convert_in_yolo(json_file):
     except Exception as e:
         print(e)
 
-for subdir in sub_dirs:
-    json_dir = Path(base_data_dir, subdir)
-    print(YELLOW + f"\n\U0001F4C1\U0001F4C1\U0001F4C1 Aktuelles Verzeichnis: {json_dir}"+ RESET)
-    for json_file in json_dir.glob("*.json"):
-        convert_in_yolo(json_file)
+def save_yolo_string(name_string, lable_string, base_dir, sub_dir):
+    name = name_string.split('.')[0] + '.txt'
+    full_path = Path(base_dir) / sub_dir / name
+    if full_path.exists() and full_path.exists():
+        print(YELLOW + f"Label-txt: {name} bereits vorhanden\n" + RESET)
+    else:
+        with open(full_path, 'w', encoding='utf-8') as f:
+            f.write(lable_string)
+        print(RED + "Speichere .txt\n" + RESET)
 
-"""
+# ================== MAIN ==================
+if __name__ == "__main__":
+    print(RED + "\U0001F4C1 \U000027A1 \U0001F4D1 Starte Konvertierung von JSON zu YOLO-Format..." + RESET)
 
-!!!!!!!!Script noch nihct fertig!!!!!!!!!!!!!
+    # Auflisten der Verzeichnisse
+    list_folder(SUBFOLDER_PATH,BASE_DATA_DIR)
 
+    # Konvertieren der .json zu yolo .txt so wie speichern der .txt im richtigen Verzeichnis.
+    for subdir in SUBFOLDER_PATH:
+        json_path = Path(BASE_DATA_DIR, subdir)
+        print(YELLOW + f"\n\U0001F4C1\U0001F4C1\U0001F4C1 Aktuelles Verzeichnis: {json_path}"+ RESET)
+        for json_file in json_path.glob("*.json"):
+            file_name, label = convert_in_yolo(json_file,CLASS_TO_ID)
+            print(f"Bild: {file_name}\nYOLO Format: {label}")
+            try:
+                save_yolo_string(file_name, label, BASE_LABELS_DIR, subdir)
 
-"""
+            except Exception as e:
+                print(f'####_Fehler beim Speichern der Datei: {json_file} mit {e}')
+
+    print("\n" + RED + ">>> " + "\033[1m" +
+          "KONVERTIERUNG ABGESCHLOSSEN" +
+          "\033[0m" + RESET + "\n")

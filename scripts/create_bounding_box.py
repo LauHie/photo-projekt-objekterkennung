@@ -15,7 +15,6 @@ Funktionen:
 import os
 import subprocess
 import sys
-from operator import truediv
 from pathlib import Path
 
 # ================== KONFIGURATION ==================
@@ -28,7 +27,6 @@ LABELME_PATH = VENV_PATH / "Scripts" / "labelme.exe"
 def check_environment(path_to_check: Path):
     try:
         if path_to_check.exists() and path_to_check.is_dir():
-            print("########_Environment exists_#######")
             return True
         elif path_to_check.exists() and path_to_check.is_file():
             return True
@@ -45,26 +43,53 @@ def check_environment(path_to_check: Path):
     except Exception as e:
         print(e)
 
-# ================== HAUPTPROGRAMM ==================
+def activate_environment(path_to_activate: Path, check: bool):
+    try:
+        if check:
+            is_powershell = "PSVersion" in os.environ
+
+            if is_powershell:
+                activate_script = path_to_activate / "Scripts" / "Activate.ps1"
+                command = f'& "{activate_script}"'
+            else:
+                activate_script = path_to_activate / "Scripts" / "Activate.bat"
+                command = f'call "{activate_script}"'
+
+            #Ausführen vom Kommand und Stausmeldung entgegennehmen
+            status = subprocess.run(command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+            if status.returncode != 0:
+                print(f"Fehler beim Aktivieren der Umgebung")
+            elif status.returncode == 0:
+                print("#######__VENV-AKTIV__#######")
+
+    except OSError as e:
+        print(f"OS Fehler__##__ {e}")
+
+# ================== MAIN ==================
 def main():
     print("####__Starte Labeling-Prozess...__####")
 
     if not check_environment(BASE_DIR):
-        print("❌ Projektverzeichnis Fehler: Umgebung nicht korrekt konfiguriert")
+        print("XXXXXX_Projektverzeichnis Fehler: Umgebung nicht korrekt konfiguriert")
         sys.exit(1)
 
     if not check_environment(VENV_PATH):
-        print("❌ Virtuelles Environment Fehler: Umgebung nicht korrekt konfiguriert")
+        print("XXXXXX_Virtuelles Environment Fehler: Umgebung nicht korrekt konfiguriert")
         sys.exit(1)
 
     if not check_environment(LABELME_PATH):
-        print("❌ Labelme-Fehler: Datei nicht gefunden")
+        print("XXXXXX_Labelme-Fehler: Datei nicht gefunden")
         sys.exit(1)
+
+    elif check_environment(VENV_PATH):
+        activate_environment(VENV_PATH, check=True)
 
     try:
         os.chdir(BASE_DIR / "processed_data" / "images")
         subprocess.run([str(LABELME_PATH)], check=True)
-        sys.exit(0)
+
+        # subprocess.run([str(VENV_PATH / "Scripts" / "python.exe"),str(BASE_DIR / "scripts" / "convert_in_yolo.py")], check=True)
 
     except subprocess.CalledProcessError as e:
         print(e)
