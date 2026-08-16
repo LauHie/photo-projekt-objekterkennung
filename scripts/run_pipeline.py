@@ -13,13 +13,17 @@ import sys
 from pathlib import Path
 import ultralytics
 import os
+import torch
 
 # ================== KONFIGURATION ==================
 SCRIPTS_DIR = Path(__file__).parent
 BASE_DIR = SCRIPTS_DIR.parent
 
-def starte_script():
-    pass
+def starte_script(skript_name):
+    subprocess.run(["python", str(BASE_DIR / "scripts" / "run_pipeline.py"),])
+
+
+
 
 
 
@@ -40,25 +44,3 @@ if __name__ == "__main__":
     """)
     print(BASE_DIR)
     print(SCRIPTS_DIR)
-
-    # Pfad zur yolov8n.yaml-Datei
-    # Korrekter Pfad zur yolov8n.yaml (YOLOv8)
-    yaml_path = os.path.join(os.path.dirname(ultralytics.__file__), "cfg", "models", "v8", "yolov8n.yaml")
-    print(f"Pfad zur yolov8n.yaml: {yaml_path}")
-
-    # Überprüfe, ob die Datei existiert
-    if os.path.exists(yaml_path):
-        print("✅ Datei gefunden!")
-    else:
-        print("❌ Datei nicht gefunden. Suche in anderen Verzeichnissen...")
-        # Alternative Pfade prüfen
-        alternative_paths = [
-            os.path.join(os.path.dirname(ultralytics.__file__), "cfg", "models", "yolov8n.yaml"),
-            os.path.join(os.path.dirname(ultralytics.__file__), "models", "v8", "yolov8n.yaml"),
-            os.path.join(os.path.dirname(ultralytics.__file__), "models", "yolov8n.yaml"),
-        ]
-        for path in alternative_paths:
-            if os.path.exists(path):
-                print(f"✅ Alternative Datei gefunden unter: {path}")
-                yaml_path = path
-                break

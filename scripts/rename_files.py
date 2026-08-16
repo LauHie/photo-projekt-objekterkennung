@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 # ================== ORDNERPFAD ==================
-FOLDER_PATH = r'C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\raw_data\negatives'
+FOLDER_PATH = r'C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\raw_data\full_views'
 
 # ================== FUNKTIONEN ==================
 def get_lastcount(name_class):
@@ -43,7 +43,11 @@ def rename_files_in_folder(folder_path):
     name, count_start = define_sub_folder()
 
     # Liste alle Dateien im Ordner auf
-    sub_folder = Path(folder_path) / name
+    if name == 'scooter':
+        sub_folder = Path(folder_path)
+    else:
+        sub_folder = Path(folder_path) / name
+
     files = os.listdir(sub_folder)
 
     # Filtere nur Dateien
