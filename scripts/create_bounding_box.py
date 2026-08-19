@@ -89,8 +89,6 @@ def main():
         os.chdir(BASE_DIR / "processed_data" / "images")
         subprocess.run([str(LABELME_PATH)], check=True)
 
-        # subprocess.run([str(VENV_PATH / "Scripts" / "python.exe"),str(BASE_DIR / "scripts" / "convert_in_yolo.py")], check=True)
-
     except subprocess.CalledProcessError as e:
         print(e)
         sys.exit(1)

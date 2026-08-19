@@ -3,6 +3,7 @@ Skript zum Umbenennen der Bilder im raw_data Ordner um so einheitliche Bezeichnu
 """
 import os
 from pathlib import Path
+import sys
 
 # ================== ORDNERPFAD ==================
 FOLDER_PATH_FullVIEWS = r'C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\raw_data\full_views'
@@ -41,52 +42,67 @@ def define_sub_folder():
     return name, count_start
 
 def rename_files_in_folder():
+    while True:
+        try:
+            name, count_start = define_sub_folder()
 
-    name, count_start = define_sub_folder()
+            # Liste alle Dateien im Ordner auf
+            if name == 'scooter':
+                sub_folder = Path(FOLDER_PATH_FullVIEWS)
+            else:
+                sub_folder = Path(FOLDER_PATH_NEGATIVES) / name
 
-    # Liste alle Dateien im Ordner auf
-    if name == 'scooter':
-        sub_folder = Path(FOLDER_PATH_FullVIEWS)
-    else:
-        sub_folder = Path(FOLDER_PATH_NEGATIVES) / name
+            # Prüfe, ob der Ordner existiert
+            if not sub_folder.exists():
+                print(f"Ordner nicht gefunden: {sub_folder}")
+                sys.exit(1)  # Beende das Skript mit Fehlercode
 
-    files = os.listdir(sub_folder)
+            files = os.listdir(sub_folder)
 
-    # Filtere nur Dateien
-    files = [f for f in files if os.path.isfile(os.path.join(sub_folder, f))]
+            # Filtere nur Dateien
+            files = [f for f in files if os.path.isfile(os.path.join(sub_folder, f))]
 
-    # Sortiere die Dateien alphabetisch
-    files.sort()
+            # Sortiere die Dateien alphabetisch
+            files.sort()
 
-    counter = count_start
+            counter = count_start
 
-    for filename in files:
-        if counter < 10:
-            s = f"{counter:03d}"
+            for filename in files:
+                if counter < 10:
+                    s = f"{counter:03d}"
+                elif 100 > counter >= 10:
+                    s = f"{counter:03d}"
+                elif counter > 100:
+                    s = f"{counter}"
 
-        if 100 > counter >= 10:
-            s = f"{counter:03d}"
+                # Erstelle den neuen Dateinamen
+                new_name = f"{name}_{s}"
 
-        elif counter > 100:
-            s = f"{counter}"
+                # Extrahiere die Dateiendung der ursprünglichen Datei
+                file_extension = os.path.splitext(filename)[1]
 
-        # Erstelle den neuen Dateinamen
-        new_name = f"{name}_{s}"
+                # Vollständiger Pfad der alten und neuen Datei
+                old_file = os.path.join(sub_folder, filename)
+                new_file = os.path.join(sub_folder, new_name + file_extension)
 
-        # Extrahiere die Dateiendung der ursprünglichen Datei
-        file_extension = os.path.splitext(filename)[1]
+                # Benenne die Datei um
+                os.rename(old_file, new_file)
 
-        # Vollständiger Pfad der alten und neuen Datei
-        old_file = os.path.join(sub_folder, filename)
-        new_file = os.path.join(sub_folder, new_name + file_extension)
+                print(f"Umbenannt: {filename} -> {new_name}{file_extension}")
 
-        # Benenne die Datei um
-        os.rename(old_file, new_file)
+                # Erhöhe den Zähler
+                counter += 1
 
-        print(f"Umbenannt: {filename} -> {new_name}{file_extension}")
+            # Frage, ob eine weitere Kategorie umbenannt werden soll
+            schleife = input("\nMöchtest du eine weitere Kategorie umbenennen? [1 = Ja / 2 = Nein]: ").strip()
+            if schleife == '2':
+                break  # Schleife beenden
+            elif schleife != '1':
+                print("Ungültige Eingabe. Bitte 1 oder 2 eingeben.")
 
-        # Erhöhe den Zähler
-        counter += 1
+        except Exception as e:
+            print(f"Fehler in rename_files.py: {e}")
+            sys.exit(1)  # Beende das Skript mit Fehlercode
 
 
 # ================== MAIN ==================

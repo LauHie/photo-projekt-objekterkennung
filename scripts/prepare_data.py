@@ -98,9 +98,59 @@ def copy_files_to_destination(files, destination_path):
         try:
             # Kopiere die Datei
             shutil.copy2(file, destination_path)
-            print(f"✅ Kopiert: {file.name}")
+            print(f"Kopiert: {file.name}")
         except Exception as e:
-            print(f"❌ Fehler beim Kopieren von {file.name}: {e}")
+            print(f"Fehler beim Kopieren von {file.name}: {e}")
+
+def cleanup_raw_data():
+    """
+    Prüft, ob alle Bilder aus raw_data in processed_data liegen.
+    Falls ja, werden sie aus raw_data gelöscht.
+    """
+    print("\nPrüfe, ob Bilder aus raw_data in processed_data liegen...")
+
+    # Liste aller Bilder in raw_data
+    raw_images = []
+
+    # Durchsuche full_views
+    full_views_path = Path(RAW_DATA) / "full_views"
+    if full_views_path.exists():
+        for file in full_views_path.iterdir():
+            if file.is_file() and file.suffix.lower() in ['.jpg', '.jpeg', '.png']:
+                raw_images.append(file)
+
+    # Durchsuche negatives
+    negatives_path = Path(RAW_DATA) / "negatives"
+    if negatives_path.exists():
+        for category in negatives_path.iterdir():
+            if category.is_dir():
+                for file in category.iterdir():
+                    if file.is_file() and file.suffix.lower() in ['.jpg', '.jpeg', '.png']:
+                        raw_images.append(file)
+
+    # Prüfe für jedes Bild in raw_data, ob es in processed_data existiert
+    deleted_count = 0
+    for raw_image in raw_images:
+        # Extrahiere den Dateinamen
+        filename = raw_image.name
+
+        # Durchsuche processed_data nach der Datei
+        found_in_processed = False
+        for root, dirs, files in os.walk(PROCESSED_DATA):
+            if filename in files:
+                found_in_processed = True
+                break
+
+        # Falls das Bild in processed_data gefunden wurde, lösche es aus raw_data
+        if found_in_processed:
+            try:
+                os.remove(raw_image)
+                print(f"Gelöscht: {raw_image}")
+                deleted_count += 1
+            except Exception as e:
+                print(f"Fehler beim Löschen von {raw_image}: {e}")
+
+    print(f"\n{deleted_count} Bilder aus raw_data gelöscht (da sie in processed_data liegen).")
 
 def process_images():
     print("Suche nach Bilddateien...")
@@ -151,5 +201,8 @@ if __name__ == "__main__":
 
     # Wenn Bilder vorhanden sind, verarbeite sie
     process_images()
+
+    # Führe Cleanup aus: Lösche Bilder aus raw_data, die bereits in processed_data liegen
+    cleanup_raw_data()
 
     print(" Datenverarbeitung abgeschlossen!")
