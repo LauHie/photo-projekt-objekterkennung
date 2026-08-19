@@ -10,7 +10,7 @@ RED = "\033[31m"
 def main():
     CUSTOM_MODEL_YAML = Path(r"C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\yolov8-custom.yaml")
     DATA_YAML = Path(r"C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\processed_data\data.yaml")
-    RUN_NAME = 'test_run'
+    RUN_NAME = 'RUN_1'
 
     # ================== CHECKS ==================
     if not CUSTOM_MODEL_YAML.is_file():
@@ -22,7 +22,7 @@ def main():
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA nicht verfügbar! Überprüfe die PyTorch-Installation.")
 
-    print(f"✅ GPU: {torch.cuda.get_device_name(0)}")
+    print(YELLOW + f"GPU: {torch.cuda.get_device_name(0)}" + RESET)
     print(f"   VRAM: {torch.cuda.get_device_properties(0).total_memory / 1024**3:.1f} GB")
 
     # ================== MODEL LADEN ==================
@@ -32,9 +32,9 @@ def main():
     train_results = model.train(
         data=str(DATA_YAML),
         epochs=100,
-        imgsz=1024,
-        batch=4,
-        device=0,
+        imgsz=640,
+        batch=16,
+        device=0,   # 0 = GPU
         name=RUN_NAME,
         pretrained=False,
         half=False,

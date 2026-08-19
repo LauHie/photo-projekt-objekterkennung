@@ -5,7 +5,9 @@ import os
 from pathlib import Path
 
 # ================== ORDNERPFAD ==================
-FOLDER_PATH = r'C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\raw_data\full_views'
+FOLDER_PATH_FullVIEWS = r'C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\raw_data\full_views'
+FOLDER_PATH_NEGATIVES = r'C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\raw_data\negatives'
+
 
 # ================== FUNKTIONEN ==================
 def get_lastcount(name_class):
@@ -32,21 +34,21 @@ def define_sub_folder():
     Kategorien = [edge, other, similar, street] 
     :return: Name der Kategorie, Bild-Count Startpunkt
     """
-    name = input("Kategorie eingeben: ")
+    name = input("Kategorie eingeben (scooter oder Negatives: other, similar, street, edge)-->: ")
     print(f"{get_lastcount(name)} Bilder in processed_data bereits abgelegt")
     count_start: int = int(input("Index angeben: "))
 
     return name, count_start
 
-def rename_files_in_folder(folder_path):
+def rename_files_in_folder():
 
     name, count_start = define_sub_folder()
 
     # Liste alle Dateien im Ordner auf
     if name == 'scooter':
-        sub_folder = Path(folder_path)
+        sub_folder = Path(FOLDER_PATH_FullVIEWS)
     else:
-        sub_folder = Path(folder_path) / name
+        sub_folder = Path(FOLDER_PATH_NEGATIVES) / name
 
     files = os.listdir(sub_folder)
 
@@ -89,4 +91,4 @@ def rename_files_in_folder(folder_path):
 
 # ================== MAIN ==================
 if __name__ == "__main__":
-    rename_files_in_folder(FOLDER_PATH)
+    rename_files_in_folder()
