@@ -25,10 +25,9 @@ BASE_DIR = SCRIPTS_DIR.parent        # Projekt-Root
 # Liste der Skripte in der richtigen Reihenfolge
 PIPELINE_SCRIPTS = [
     ("rename_files.py", "Umbenennen der Bilder"),
-    ("prepare_data.py", "Datenstruktur vorbereiten (train/val/test)")
-
-    # ("create_bounding_box.py", "Bounding Boxes erstellen (mit labelme)"),
-    # ("convert_in_yolo.py", "Labels in YOLO-Format konvertieren")
+    ("prepare_data.py", "Datenstruktur vorbereiten (train/val/test)"),
+    ("create_bounding_box.py", "Bounding Boxes erstellen (mit labelme)"),
+    ("convert_in_yolo.py", "Labels in YOLO-Format konvertieren")
 ]
 
 # ================== FUNKTION ==================

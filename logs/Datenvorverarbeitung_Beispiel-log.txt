@@ -1,0 +1,723 @@
+C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\.venv\Scripts\python.exe C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\scripts\run_pipeline.py
+
+    ╔═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+    ║
+    ║   YOLO Objekterkennung - Datenverarbeitungspipeline
+    ║
+    ║   Dieses Programm bereitet die Bilder für die Objekterkennung mit YOLO
+    ║   vor. Es führt folgende Schritte aus:
+    ║
+    ║   1. Dateien umbenennen
+    ║   2. Datenstruktur vorbereiten (train/val/test)
+    ║   3. Bounding Boxes erstellen (mit labelme)
+    ║   4. Labels in YOLO-Format konvertieren
+    ║
+
+Projektverzeichnis: C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung
+Skriptverzeichnis:   C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\scripts
+
+
+############__Umbenennen der Bilder__############
+
+Starte Skript: rename_files.py ...
+Kategorie eingeben (scooter oder Negatives: other, similar, street, edge)-->: s
+-1 Bilder in processed_data bereits abgelegt
+Index angeben: 1
+Ordner nicht gefunden: C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\raw_data\negatives\s
+
+Fehler in rename_files.py!
+
+Fehler in 'rename_files.py'. Soll die Pipeline abgebrochen werden? [j/n]: n
+
+Fahre mit dem nächsten Schritt fort...
+
+############__Datenstruktur vorbereiten (train/val/test)__############
+
+Starte Skript: prepare_data.py ...
+ Starte Datenverarbeitung...
+Suche nach Bilddateien...
+Gefunden: 0 edge Bilder
+Gefunden: 0 other Bilder
+Gefunden: 0 similar Bilder
+Gefunden: 0 street Bilder
+Gefunden: 0 full_views Bilder
+
+Prüfe, ob Bilder aus raw_data in processed_data liegen...
+
+0 Bilder aus raw_data gelöscht (da sie in processed_data liegen).
+ Datenverarbeitung abgeschlossen!
+
+prepare_data.py erfolgreich ausgeführt.
+
+############__Datenstruktur vorbereiten (train/val/test) abgeschlossen!__############
+
+############__Bounding Boxes erstellen (mit labelme)__############
+
+Starte Skript: create_bounding_box.py ...
+####__Starte Labeling-Prozess...__####
+#######__VENV-AKTIV__#######
+2026-08-19 15:17:51.535 | INFO     | labelme.__main__:main:227 - Starting Labelme 6.3.1
+2026-08-19 15:17:58.990 | DEBUG    | labelme.app:_scan_image_files:2733 - found 18 images in 'C:/Studium_KI_Programme/Photo_Projekt_Objekterkennung/processed_data/images/test/scooter'
+2026-08-19 15:17:58.993 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 0
+2026-08-19 15:17:59.008 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\test\\scooter\\scooter_002.jpg' in 12ms
+2026-08-19 15:17:59.056 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 31ms
+2026-08-19 15:17:59.061 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 5ms
+2026-08-19 15:17:59.063 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\test\\scooter\\scooter_002.jpg' in 67ms
+2026-08-19 15:18:01.577 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\test\\scooter\\scooter_608.jpg' in 4ms
+2026-08-19 15:18:01.708 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 132ms
+2026-08-19 15:18:01.759 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 50ms
+2026-08-19 15:18:01.760 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\test\\scooter\\scooter_608.jpg' in 188ms
+2026-08-19 15:18:16.729 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 16
+2026-08-19 15:18:16.742 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\test\\scooter\\scooter_610.jpg' in 4ms
+2026-08-19 15:18:16.879 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 137ms
+2026-08-19 15:18:16.936 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 52ms
+2026-08-19 15:18:16.937 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\test\\scooter\\scooter_610.jpg' in 197ms
+2026-08-19 15:18:29.749 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 17
+2026-08-19 15:18:29.754 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\test\\scooter\\scooter_618.jpg' in 3ms
+2026-08-19 15:18:29.887 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 133ms
+2026-08-19 15:18:29.941 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 50ms
+2026-08-19 15:18:29.942 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\test\\scooter\\scooter_618.jpg' in 192ms
+2026-08-19 15:18:38.601 | DEBUG    | labelme.app:_open_next_image:2194 - there is no next image
+2026-08-19 15:18:46.961 | DEBUG    | labelme.app:_scan_image_files:2733 - found 90 images in 'C:/Studium_KI_Programme/Photo_Projekt_Objekterkennung/processed_data/images/train/scooter'
+2026-08-19 15:18:46.977 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 0
+2026-08-19 15:18:46.984 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_001.jpg' in 2ms
+2026-08-19 15:18:47.015 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 30ms
+2026-08-19 15:18:47.024 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 5ms
+2026-08-19 15:18:47.026 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_001.jpg' in 44ms
+2026-08-19 15:18:52.922 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_609.jpg' in 3ms
+2026-08-19 15:18:53.063 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 140ms
+2026-08-19 15:18:53.115 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 51ms
+2026-08-19 15:18:53.116 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_609.jpg' in 197ms
+2026-08-19 15:19:05.053 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 79
+2026-08-19 15:19:05.057 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_611.jpg' in 3ms
+2026-08-19 15:19:05.197 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 140ms
+2026-08-19 15:19:05.250 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 50ms
+2026-08-19 15:19:05.250 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_611.jpg' in 196ms
+2026-08-19 15:19:14.464 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 80
+2026-08-19 15:19:14.469 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_612.jpg' in 3ms
+2026-08-19 15:19:14.604 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 135ms
+2026-08-19 15:19:14.658 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 51ms
+2026-08-19 15:19:14.660 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_612.jpg' in 194ms
+2026-08-19 15:19:22.920 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 81
+2026-08-19 15:19:22.926 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_613.jpg' in 4ms
+2026-08-19 15:19:23.074 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 147ms
+2026-08-19 15:19:23.131 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 53ms
+2026-08-19 15:19:23.132 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_613.jpg' in 209ms
+2026-08-19 15:19:32.744 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 82
+2026-08-19 15:19:32.749 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_614.jpg' in 4ms
+2026-08-19 15:19:32.886 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 137ms
+2026-08-19 15:19:32.940 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 52ms
+2026-08-19 15:19:32.940 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_614.jpg' in 196ms
+2026-08-19 15:19:45.440 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 83
+2026-08-19 15:19:45.446 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_615.jpg' in 4ms
+2026-08-19 15:19:45.586 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 140ms
+2026-08-19 15:19:45.641 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 52ms
+2026-08-19 15:19:45.642 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_615.jpg' in 200ms
+2026-08-19 15:19:55.856 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 84
+2026-08-19 15:19:55.861 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_616.jpg' in 3ms
+2026-08-19 15:19:56.004 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 142ms
+2026-08-19 15:19:56.060 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 54ms
+2026-08-19 15:19:56.061 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_616.jpg' in 203ms
+2026-08-19 15:20:04.208 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 85
+2026-08-19 15:20:04.212 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_617.jpg' in 3ms
+2026-08-19 15:20:04.347 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 134ms
+2026-08-19 15:20:04.405 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 55ms
+2026-08-19 15:20:04.407 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_617.jpg' in 198ms
+2026-08-19 15:20:11.751 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 86
+2026-08-19 15:20:11.757 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_620.jpg' in 3ms
+2026-08-19 15:20:11.893 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 136ms
+2026-08-19 15:20:11.952 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 55ms
+2026-08-19 15:20:11.953 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_620.jpg' in 200ms
+2026-08-19 15:20:21.535 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 87
+2026-08-19 15:20:21.563 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_621.jpg' in 26ms
+2026-08-19 15:20:21.699 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 135ms
+2026-08-19 15:20:21.759 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 57ms
+2026-08-19 15:20:21.760 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_621.jpg' in 223ms
+2026-08-19 15:20:31.319 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 88
+2026-08-19 15:20:31.324 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_622.jpg' in 3ms
+2026-08-19 15:20:31.463 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 139ms
+2026-08-19 15:20:31.519 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 53ms
+2026-08-19 15:20:31.520 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_622.jpg' in 200ms
+2026-08-19 15:20:41.248 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 89
+2026-08-19 15:20:41.252 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_623.jpg' in 3ms
+2026-08-19 15:20:41.388 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 136ms
+2026-08-19 15:20:41.451 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 59ms
+2026-08-19 15:20:41.452 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\train\\scooter\\scooter_623.jpg' in 203ms
+2026-08-19 15:20:51.999 | DEBUG    | labelme.app:_open_next_image:2194 - there is no next image
+2026-08-19 15:20:58.870 | DEBUG    | labelme.app:_scan_image_files:2733 - found 24 images in 'C:/Studium_KI_Programme/Photo_Projekt_Objekterkennung/processed_data/images/val/scooter'
+2026-08-19 15:20:58.876 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 0
+2026-08-19 15:20:58.881 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\val\\scooter\\scooter_003.jpg' in 3ms
+2026-08-19 15:20:58.913 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 32ms
+2026-08-19 15:20:58.922 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 4ms
+2026-08-19 15:20:58.924 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\val\\scooter\\scooter_003.jpg' in 46ms
+2026-08-19 15:21:01.385 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\val\\scooter\\scooter_606.jpg' in 4ms
+2026-08-19 15:21:01.523 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 138ms
+2026-08-19 15:21:01.577 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 54ms
+2026-08-19 15:21:01.578 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\val\\scooter\\scooter_606.jpg' in 197ms
+2026-08-19 15:21:10.619 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 22
+2026-08-19 15:21:10.624 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\val\\scooter\\scooter_607.jpg' in 3ms
+2026-08-19 15:21:10.758 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 134ms
+2026-08-19 15:21:10.823 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 61ms
+2026-08-19 15:21:10.824 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\val\\scooter\\scooter_607.jpg' in 203ms
+2026-08-19 15:21:19.414 | DEBUG    | labelme.app:_open_next_image:2197 - setting current row to 23
+2026-08-19 15:21:19.419 | DEBUG    | labelme._label_file:read_image_file:182 - Loaded image file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\val\\scooter\\scooter_619.jpg' in 3ms
+2026-08-19 15:21:19.558 | DEBUG    | labelme.app:_load_file:2043 - Created QImage in 139ms
+2026-08-19 15:21:19.622 | DEBUG    | labelme.app:_load_file:2060 - Loaded pixmap in 60ms
+2026-08-19 15:21:19.623 | INFO     | labelme.app:_load_file:2096 - Loaded file: 'C:\\Studium_KI_Programme\\Photo_Projekt_Objekterkennung\\processed_data\\images\\val\\scooter\\scooter_619.jpg' in 206ms
+
+create_bounding_box.py erfolgreich ausgeführt.
+
+############__Bounding Boxes erstellen (mit labelme) abgeschlossen!__############
+
+############__Labels in YOLO-Format konvertieren__############
+
+Starte Skript: convert_in_yolo.py ...
+📁 ➡ 📑 Starte Konvertierung von JSON zu YOLO-Format...
+📄 Dateien aus TRAIN/SCOOTER werden konvertiert
+📄 Dateien aus TEST/SCOOTER werden konvertiert
+📄 Dateien aus VAL/SCOOTER werden konvertiert
+
+📁📁📁 Aktuelles Verzeichnis: C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\processed_data\images\train\scooter
+Bild: scooter_001.jpg
+YOLO Format: 0 0.49239130 0.47717391 0.28043478 0.47826087
+Label-txt: scooter_001.txt bereits vorhanden
+
+Bild: scooter_004.jpg
+YOLO Format: 0 0.47065217 0.47826087 0.20217391 0.49782609
+Label-txt: scooter_004.txt bereits vorhanden
+
+Bild: scooter_005.jpg
+YOLO Format: 0 0.47608696 0.49239130 0.16086957 0.46086957
+Label-txt: scooter_005.txt bereits vorhanden
+
+Bild: scooter_104.jpg
+YOLO Format: 0 0.54565217 0.43695652 0.22608696 0.59347826
+Label-txt: scooter_104.txt bereits vorhanden
+
+Bild: scooter_105.jpg
+YOLO Format: 0 0.53859649 0.47631579 0.16842105 0.46842105
+Label-txt: scooter_105.txt bereits vorhanden
+
+Bild: scooter_106.jpg
+YOLO Format: 0 0.63596491 0.48157895 0.23684211 0.43684211
+Label-txt: scooter_106.txt bereits vorhanden
+
+Bild: scooter_201.jpg
+YOLO Format: 0 0.51754386 0.50877193 0.32631579 0.45263158
+Label-txt: scooter_201.txt bereits vorhanden
+
+Bild: scooter_202.jpg
+YOLO Format: 0 0.51842105 0.46666667 0.31754386 0.53684211
+Label-txt: scooter_202.txt bereits vorhanden
+
+Bild: scooter_205.jpg
+YOLO Format: 0 0.48070175 0.43771930 0.42456140 0.48245614
+Label-txt: scooter_205.txt bereits vorhanden
+
+Bild: scooter_207.jpg
+YOLO Format: 0 0.69912281 0.50438596 0.30000000 0.52105263
+Label-txt: scooter_207.txt bereits vorhanden
+
+Bild: scooter_208.jpg
+YOLO Format: 0 0.48070175 0.42105263 0.40701754 0.47017544
+Label-txt: scooter_208.txt bereits vorhanden
+
+Bild: scooter_209.jpg
+YOLO Format: 0 0.29210526 0.44561404 0.37017544 0.49122807
+Label-txt: scooter_209.txt bereits vorhanden
+
+Bild: scooter_210.jpg
+YOLO Format: 0 0.69035088 0.45614035 0.35964912 0.48771930
+Label-txt: scooter_210.txt bereits vorhanden
+
+Bild: scooter_211.jpg
+YOLO Format: 0 0.38596491 0.46842105 0.34736842 0.43508772
+Label-txt: scooter_211.txt bereits vorhanden
+
+Bild: scooter_212.jpg
+YOLO Format: 0 0.58070175 0.46842105 0.34035088 0.53684211
+Label-txt: scooter_212.txt bereits vorhanden
+
+Bild: scooter_213.jpg
+YOLO Format: 0 0.26315789 0.46842105 0.22105263 0.41052632
+Label-txt: scooter_213.txt bereits vorhanden
+
+Bild: scooter_214.jpg
+YOLO Format: 0 0.26491228 0.47719298 0.37192982 0.41403509
+Label-txt: scooter_214.txt bereits vorhanden
+
+Bild: scooter_215.jpg
+YOLO Format: 0 0.45789474 0.44298246 0.40701754 0.45438596
+Label-txt: scooter_215.txt bereits vorhanden
+
+Bild: scooter_217.jpg
+YOLO Format: 0 0.65263158 0.50877193 0.34385965 0.52280702
+Label-txt: scooter_217.txt bereits vorhanden
+
+Bild: scooter_218.jpg
+YOLO Format: 0 0.43684211 0.43771930 0.25263158 0.48947368
+Label-txt: scooter_218.txt bereits vorhanden
+
+Bild: scooter_219.jpg
+YOLO Format: 0 0.26052632 0.45263158 0.42280702 0.51228070
+Label-txt: scooter_219.txt bereits vorhanden
+
+Bild: scooter_220.jpg
+YOLO Format: 0 0.83157895 0.48157895 0.32982456 0.49649123
+Label-txt: scooter_220.txt bereits vorhanden
+
+Bild: scooter_221.jpg
+YOLO Format: 0 0.20877193 0.35877193 0.37543860 0.42631579
+Label-txt: scooter_221.txt bereits vorhanden
+
+Bild: scooter_222.jpg
+YOLO Format: 0 0.49122807 0.47280702 0.31929825 0.48596491
+Label-txt: scooter_222.txt bereits vorhanden
+
+Bild: scooter_302.jpg
+YOLO Format: 0 0.51228070 0.48596491 0.27719298 0.51929825
+Label-txt: scooter_302.txt bereits vorhanden
+
+Bild: scooter_303.jpg
+YOLO Format: 0 0.24035088 0.48245614 0.24912281 0.38596491
+Label-txt: scooter_303.txt bereits vorhanden
+
+Bild: scooter_305.jpg
+YOLO Format: 0 0.44122807 0.44298246 0.35964912 0.50701754
+Label-txt: scooter_305.txt bereits vorhanden
+
+Bild: scooter_306.jpg
+YOLO Format: 0 0.32017544 0.47631579 0.26842105 0.41929825
+Label-txt: scooter_306.txt bereits vorhanden
+
+Bild: scooter_308.jpg
+YOLO Format: 0 0.30175439 0.46052632 0.30877193 0.47543860
+Label-txt: scooter_308.txt bereits vorhanden
+
+Bild: scooter_309.jpg
+YOLO Format: 0 0.70964912 0.37631579 0.41228070 0.46842105
+Label-txt: scooter_309.txt bereits vorhanden
+
+Bild: scooter_311.jpg
+YOLO Format: 0 0.51666667 0.44824561 0.37368421 0.45789474
+Label-txt: scooter_311.txt bereits vorhanden
+
+Bild: scooter_312.jpg
+YOLO Format: 0 0.44035088 0.48421053 0.27017544 0.46315789
+Label-txt: scooter_312.txt bereits vorhanden
+
+Bild: scooter_313.jpg
+YOLO Format: 0 0.72894737 0.42982456 0.36315789 0.38947368
+Label-txt: scooter_313.txt bereits vorhanden
+
+Bild: scooter_315.jpg
+YOLO Format: 0 0.31491228 0.45614035 0.37017544 0.41754386
+Label-txt: scooter_315.txt bereits vorhanden
+
+Bild: scooter_316.jpg
+YOLO Format: 0 0.21228070 0.45701754 0.36842105 0.47192982
+Label-txt: scooter_316.txt bereits vorhanden
+
+Bild: scooter_318.jpg
+YOLO Format: 0 0.38070175 0.43771930 0.24561404 0.52807018
+Label-txt: scooter_318.txt bereits vorhanden
+
+Bild: scooter_319.jpg
+YOLO Format: 0 0.39385965 0.45438596 0.22280702 0.39649123
+Label-txt: scooter_319.txt bereits vorhanden
+
+Bild: scooter_320.jpg
+YOLO Format: 0 0.52192982 0.46228070 0.24035088 0.50350877
+Label-txt: scooter_320.txt bereits vorhanden
+
+Bild: scooter_321.jpg
+YOLO Format: 0 0.53508772 0.47543860 0.21052632 0.40350877
+Label-txt: scooter_321.txt bereits vorhanden
+
+Bild: scooter_324.jpg
+YOLO Format: 0 0.48771930 0.47456140 0.26666667 0.41929825
+Label-txt: scooter_324.txt bereits vorhanden
+
+Bild: scooter_325.jpg
+YOLO Format: 0 0.61052632 0.45964912 0.28070175 0.47719298
+Label-txt: scooter_325.txt bereits vorhanden
+
+Bild: scooter_501.jpg
+YOLO Format: 0 0.46029526 0.50529269 0.62444729 0.94209802
+Label-txt: scooter_501.txt bereits vorhanden
+
+Bild: scooter_553.jpg
+YOLO Format: 0 0.46764241 0.49761359 0.38377606 0.75410462
+Label-txt: scooter_553.txt bereits vorhanden
+
+Bild: scooter_554.jpg
+YOLO Format: 0 0.49656003 0.51849243 0.55727554 0.78372666
+Label-txt: scooter_554.txt bereits vorhanden
+
+Bild: scooter_555.jpg
+YOLO Format: 0 0.75329736 0.52155172 0.37470024 0.89609800
+Label-txt: scooter_555.txt bereits vorhanden
+
+Bild: scooter_556.jpg
+YOLO Format: 0 0.54194254 0.55488829 0.45837203 0.80287572
+Label-txt: scooter_556.txt bereits vorhanden
+
+Bild: scooter_557.jpg
+YOLO Format: 0 0.62389816 0.49300968 0.50883365 0.97514942
+Label-txt: scooter_557.txt bereits vorhanden
+
+Bild: scooter_558.jpg
+YOLO Format: 0 0.69833519 0.53868629 0.46879226 0.79408711
+Label-txt: scooter_558.txt bereits vorhanden
+
+Bild: scooter_559.jpg
+YOLO Format: 0 0.50450843 0.62062618 0.55603979 0.66299725
+Label-txt: scooter_559.txt bereits vorhanden
+
+Bild: scooter_560.jpg
+YOLO Format: 0 0.40134598 0.45337790 0.49097583 0.57881773
+Label-txt: scooter_560.txt bereits vorhanden
+
+Bild: scooter_561.jpg
+YOLO Format: 0 0.57205544 0.54034168 0.52948606 0.88751688
+Label-txt: scooter_561.txt bereits vorhanden
+
+Bild: scooter_562.jpg
+YOLO Format: 0 0.53642502 0.48509217 0.30383795 0.82606942
+Label-txt: scooter_562.txt bereits vorhanden
+
+Bild: scooter_563.jpg
+YOLO Format: 0 0.38356471 0.51509233 0.43588595 0.93217330
+Label-txt: scooter_563.txt bereits vorhanden
+
+Bild: scooter_564.jpg
+YOLO Format: 0 0.42520568 0.50621891 0.38294690 0.97547974
+Label-txt: scooter_564.txt bereits vorhanden
+
+Bild: scooter_565.jpg
+YOLO Format: 0 0.55078682 0.49894595 0.64127831 0.97605194
+Label-txt: scooter_565.txt bereits vorhanden
+
+Bild: scooter_566.jpg
+YOLO Format: 0 0.59079903 0.60176510 0.50754330 0.69130084
+Label-txt: scooter_566.txt bereits vorhanden
+
+Bild: scooter_567.jpg
+YOLO Format: 0 0.72879851 0.60775234 0.34018725 0.71058303
+Label-txt: scooter_567.txt bereits vorhanden
+
+Bild: scooter_568.jpg
+YOLO Format: 0 0.50412623 0.52007401 0.65524526 0.80819718
+Label-txt: scooter_568.txt bereits vorhanden
+
+Bild: scooter_569.jpg
+YOLO Format: 0 0.49623148 0.53146186 0.48086344 0.76929322
+Label-txt: scooter_569.txt bereits vorhanden
+
+Bild: scooter_570.jpg
+YOLO Format: 0 0.44065505 0.48364378 0.48227163 0.87938732
+Label-txt: scooter_570.txt bereits vorhanden
+
+Bild: scooter_571.jpg
+YOLO Format: 0 0.47893216 0.46084495 0.42737615 0.67667965
+Label-txt: scooter_571.txt bereits vorhanden
+
+Bild: scooter_572.jpg
+YOLO Format: 0 0.52182782 0.51138434 0.73612428 0.96007893
+Label-txt: scooter_572.txt bereits vorhanden
+
+Bild: scooter_573.jpg
+YOLO Format: 0 0.39073833 0.49038932 0.54708326 0.93485706
+Label-txt: scooter_573.txt bereits vorhanden
+
+Bild: scooter_585.jpg
+YOLO Format: 0 0.47777778 0.45535714 0.57460317 0.64404762
+Label-txt: scooter_585.txt bereits vorhanden
+
+Bild: scooter_586.jpg
+YOLO Format: 0 0.46031746 0.53630952 0.73968254 0.62738095
+Label-txt: scooter_586.txt bereits vorhanden
+
+Bild: scooter_587.jpg
+YOLO Format: 0 0.43809524 0.36488095 0.18095238 0.21071429
+Label-txt: scooter_587.txt bereits vorhanden
+
+Bild: scooter_588.jpg
+YOLO Format: 0 0.44920635 0.41607143 0.61587302 0.45357143
+Label-txt: scooter_588.txt bereits vorhanden
+
+Bild: scooter_589.jpg
+YOLO Format: 0 0.52301587 0.60178571 0.77936508 0.65595238
+Label-txt: scooter_589.txt bereits vorhanden
+
+Bild: scooter_590.jpg
+YOLO Format: 0 0.50238095 0.52500000 0.74444444 0.58095238
+Label-txt: scooter_590.txt bereits vorhanden
+
+Bild: scooter_593.jpg
+YOLO Format: 0 0.54285714 0.64583333 0.43174603 0.57023810
+Label-txt: scooter_593.txt bereits vorhanden
+
+Bild: scooter_595.jpg
+YOLO Format: 0 0.30873016 0.28571429 0.45238095 0.46428571
+Label-txt: scooter_595.txt bereits vorhanden
+
+Bild: scooter_597.jpg
+YOLO Format: 0 0.45476190 0.52976190 0.56031746 0.39523810
+Label-txt: scooter_597.txt bereits vorhanden
+
+Bild: scooter_598.jpg
+YOLO Format: 0 0.59047619 0.54345238 0.57777778 0.50595238
+Label-txt: scooter_598.txt bereits vorhanden
+
+Bild: scooter_599.jpg
+YOLO Format: 0 0.48968254 0.51071429 0.18571429 0.25714286
+Label-txt: scooter_599.txt bereits vorhanden
+
+Bild: scooter_600.jpg
+YOLO Format: 0 0.50158730 0.49107143 0.48571429 0.40357143
+Label-txt: scooter_600.txt bereits vorhanden
+
+Bild: scooter_602.jpg
+YOLO Format: 0 0.53571429 0.53452381 0.20476190 0.29047619
+Label-txt: scooter_602.txt bereits vorhanden
+
+Bild: scooter_604.jpg
+YOLO Format: 0 0.45714286 0.50535714 0.08571429 0.12500000
+Label-txt: scooter_604.txt bereits vorhanden
+
+Bild: scooter_605.jpg
+YOLO Format: 0 0.48650794 0.51190476 0.25555556 0.30476190
+Label-txt: scooter_605.txt bereits vorhanden
+
+Bild: scooter_609.jpg
+YOLO Format: 0 0.48174603 0.39523810 0.41746032 0.53095238
+Speichere .txt
+
+Bild: scooter_611.jpg
+YOLO Format: 0 0.42222222 0.41488095 0.67301587 0.61547619
+Speichere .txt
+
+Bild: scooter_612.jpg
+YOLO Format: 0 0.39523810 0.47321429 0.65714286 0.62976190
+Speichere .txt
+
+Bild: scooter_613.jpg
+YOLO Format: 0 0.48650794 0.45416667 0.45873016 0.70833333
+Speichere .txt
+
+Bild: scooter_614.jpg
+YOLO Format: 0 0.49285714 0.69940476 0.39523810 0.58928571
+Speichere .txt
+
+Bild: scooter_615.jpg
+YOLO Format: 0 0.46031746 0.56607143 0.32063492 0.47261905
+Speichere .txt
+
+Bild: scooter_616.jpg
+YOLO Format: 0 0.43492063 0.53214286 0.28571429 0.43809524
+Speichere .txt
+
+Bild: scooter_617.jpg
+YOLO Format: 0 0.46349206 0.56309524 0.30476190 0.44047619
+Speichere .txt
+
+Bild: scooter_620.jpg
+YOLO Format: 0 0.44603175 0.53035714 0.34285714 0.54404762
+Speichere .txt
+
+Bild: scooter_621.jpg
+YOLO Format: 0 0.42936508 0.56190476 0.31269841 0.49523810
+Speichere .txt
+
+Bild: scooter_622.jpg
+YOLO Format: 0 0.41428571 0.57678571 0.29523810 0.47023810
+Speichere .txt
+
+Bild: scooter_623.jpg
+YOLO Format: 0 0.36825397 0.48750000 0.29523810 0.49404762
+Speichere .txt
+
+
+📁📁📁 Aktuelles Verzeichnis: C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\processed_data\images\test\scooter
+Bild: scooter_002.jpg
+YOLO Format: 0 0.40175439 0.48157895 0.18596491 0.54912281
+Label-txt: scooter_002.txt bereits vorhanden
+
+Bild: scooter_102.jpg
+YOLO Format: 0 0.49473684 0.48859649 0.15789474 0.39824561
+Label-txt: scooter_102.txt bereits vorhanden
+
+Bild: scooter_203.jpg
+YOLO Format: 0 0.71403509 0.46403509 0.28771930 0.39122807
+Label-txt: scooter_203.txt bereits vorhanden
+
+Bild: scooter_204.jpg
+YOLO Format: 0 0.24122807 0.45438596 0.26842105 0.44210526
+Label-txt: scooter_204.txt bereits vorhanden
+
+Bild: scooter_206.jpg
+YOLO Format: 0 0.52456140 0.47631579 0.35438596 0.44736842
+Label-txt: scooter_206.txt bereits vorhanden
+
+Bild: scooter_307.jpg
+YOLO Format: 0 0.56228070 0.47631579 0.25789474 0.46842105
+Label-txt: scooter_307.txt bereits vorhanden
+
+Bild: scooter_314.jpg
+YOLO Format: 0 0.56929825 0.46140351 0.41578947 0.47719298
+Label-txt: scooter_314.txt bereits vorhanden
+
+Bild: scooter_502.jpg
+YOLO Format: 0 0.47406018 0.49211688 0.62654641 0.97925864
+Label-txt: scooter_502.txt bereits vorhanden
+
+Bild: scooter_580.jpg
+YOLO Format: 0 0.49354705 0.55056317 0.72014868 0.76716532
+Label-txt: scooter_580.txt bereits vorhanden
+
+Bild: scooter_581.jpg
+YOLO Format: 0 0.52795575 0.51634727 0.44880319 0.91293195
+Label-txt: scooter_581.txt bereits vorhanden
+
+Bild: scooter_582.jpg
+YOLO Format: 0 0.49396135 0.52980365 0.47705314 0.44179523
+Label-txt: scooter_582.txt bereits vorhanden
+
+Bild: scooter_583.jpg
+YOLO Format: 0 0.50767371 0.46039848 0.66377623 0.83251197
+Label-txt: scooter_583.txt bereits vorhanden
+
+Bild: scooter_584.jpg
+YOLO Format: 0 0.45634921 0.42678571 0.66507937 0.68928571
+Label-txt: scooter_584.txt bereits vorhanden
+
+Bild: scooter_596.jpg
+YOLO Format: 0 0.31587302 0.27857143 0.43809524 0.46190476
+Label-txt: scooter_596.txt bereits vorhanden
+
+Bild: scooter_603.jpg
+YOLO Format: 0 0.51428571 0.44761905 0.12698413 0.16904762
+Label-txt: scooter_603.txt bereits vorhanden
+
+Bild: scooter_608.jpg
+YOLO Format: 0 0.56984127 0.57738095 0.21904762 0.31190476
+Speichere .txt
+
+Bild: scooter_610.jpg
+YOLO Format: 0 0.43492063 0.47500000 0.59682540 0.61190476
+Speichere .txt
+
+Bild: scooter_618.jpg
+YOLO Format: 0 0.54920635 0.52797619 0.31111111 0.43214286
+Speichere .txt
+
+
+📁📁📁 Aktuelles Verzeichnis: C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\processed_data\images\val\scooter
+Bild: scooter_003.jpg
+YOLO Format: 0 0.42456140 0.48684211 0.31578947 0.54210526
+Label-txt: scooter_003.txt bereits vorhanden
+
+Bild: scooter_006.jpg
+YOLO Format: 0 0.51403509 0.47280702 0.17543860 0.43333333
+Label-txt: scooter_006.txt bereits vorhanden
+
+Bild: scooter_101.jpg
+YOLO Format: 0 0.58596491 0.50263158 0.24561404 0.47192982
+Label-txt: scooter_101.txt bereits vorhanden
+
+Bild: scooter_103.jpg
+YOLO Format: 0 0.29298246 0.49035088 0.16140351 0.44035088
+Label-txt: scooter_103.txt bereits vorhanden
+
+Bild: scooter_216.jpg
+YOLO Format: 0 0.42105263 0.44649123 0.26666667 0.50701754
+Label-txt: scooter_216.txt bereits vorhanden
+
+Bild: scooter_301.jpg
+YOLO Format: 0 0.49473684 0.45087719 0.28421053 0.37543860
+Label-txt: scooter_301.txt bereits vorhanden
+
+Bild: scooter_304.jpg
+YOLO Format: 0 0.75175439 0.45350877 0.29298246 0.47192982
+Label-txt: scooter_304.txt bereits vorhanden
+
+Bild: scooter_310.jpg
+YOLO Format: 0 0.80175439 0.42456140 0.36842105 0.42456140
+Label-txt: scooter_310.txt bereits vorhanden
+
+Bild: scooter_317.jpg
+YOLO Format: 0 0.47631579 0.49473684 0.27543860 0.41052632
+Label-txt: scooter_317.txt bereits vorhanden
+
+Bild: scooter_322.jpg
+YOLO Format: 0 0.52719298 0.43070175 0.40526316 0.43684211
+Label-txt: scooter_322.txt bereits vorhanden
+
+Bild: scooter_323.jpg
+YOLO Format: 0 0.62719298 0.45350877 0.31403509 0.40877193
+Label-txt: scooter_323.txt bereits vorhanden
+
+Bild: scooter_574.jpg
+YOLO Format: 0 0.65160658 0.57936508 0.49932116 0.68664170
+Label-txt: scooter_574.txt bereits vorhanden
+
+Bild: scooter_575.jpg
+YOLO Format: 0 0.47086639 0.50268764 0.56026175 0.80808443
+Label-txt: scooter_575.txt bereits vorhanden
+
+Bild: scooter_576.jpg
+YOLO Format: 0 0.51420030 0.61472868 0.36023916 0.53540052
+Label-txt: scooter_576.txt bereits vorhanden
+
+Bild: scooter_577.jpg
+YOLO Format: 0 0.51973307 0.50611696 0.74268083 0.95599287
+Label-txt: scooter_577.txt bereits vorhanden
+
+Bild: scooter_578.jpg
+YOLO Format: 0 0.43465741 0.61228191 0.41332989 0.70823977
+Label-txt: scooter_578.txt bereits vorhanden
+
+Bild: scooter_579.jpg
+YOLO Format: 0 0.32432432 0.50401606 0.42942943 0.95582329
+Label-txt: scooter_579.txt bereits vorhanden
+
+Bild: scooter_591.jpg
+YOLO Format: 0 0.49206349 0.54464286 0.60317460 0.74166667
+Label-txt: scooter_591.txt bereits vorhanden
+
+Bild: scooter_592.jpg
+YOLO Format: 0 0.60079365 0.55654762 0.78888889 0.59642857
+Label-txt: scooter_592.txt bereits vorhanden
+
+Bild: scooter_594.jpg
+YOLO Format: 0 0.49206349 0.52083333 0.69206349 0.54166667
+Label-txt: scooter_594.txt bereits vorhanden
+
+Bild: scooter_601.jpg
+YOLO Format: 0 0.35238095 0.42083333 0.09206349 0.17023810
+Label-txt: scooter_601.txt bereits vorhanden
+
+Bild: scooter_606.jpg
+YOLO Format: 0 0.53095238 0.45892857 0.18571429 0.27023810
+Speichere .txt
+
+Bild: scooter_607.jpg
+YOLO Format: 0 0.53571429 0.55357143 0.21428571 0.31428571
+Speichere .txt
+
+Bild: scooter_619.jpg
+YOLO Format: 0 0.46746032 0.55000000 0.32222222 0.41904762
+Speichere .txt
+
+
+>>> KONVERTIERUNG ABGESCHLOSSEN
+
+
+convert_in_yolo.py erfolgreich ausgeführt.
+
+############__Labels in YOLO-Format konvertieren abgeschlossen!__############
+
+Alle Skripte erfolgreich ausgeführt! Pipeline abgeschlossen.
+
+Process finished with exit code 0
