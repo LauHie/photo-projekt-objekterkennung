@@ -10,7 +10,7 @@ RED = "\033[31m"
 def main():
     CUSTOM_MODEL_YAML = Path(r"C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\yolov8-custom.yaml")
     DATA_YAML = Path(r"C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\processed_data\data.yaml")
-    RUN_NAME = 'RUN_1'
+    RUN_NAME = 'RUN_3'
 
     # ================== CHECKS ==================
     if not CUSTOM_MODEL_YAML.is_file():
@@ -31,7 +31,7 @@ def main():
     # ================== TRAINING ==================
     train_results = model.train(
         data=str(DATA_YAML),
-        epochs=50,
+        epochs=120,
         imgsz=640,
         batch=16,  # Batch-Größe (16 für 4 GB VRAM)
         device=0,  # GPU
