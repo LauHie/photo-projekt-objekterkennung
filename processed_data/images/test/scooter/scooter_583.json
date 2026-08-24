@@ -1,0 +1,28 @@
+{
+  "version": "6.2.0",
+  "flags": {},
+  "shapes": [
+    {
+      "label": "scooter",
+      "points": [
+        [
+          136.76119402985074,
+          37.432835820895576
+        ],
+        [
+          653.1791044776119,
+          743.4029850746268
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {},
+      "mask": null
+    }
+  ],
+  "imagePath": "scooter_583.jpg",
+  "imageData": null,
+  "imageHeight": 848,
+  "imageWidth": 778
+}

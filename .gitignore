@@ -115,24 +115,24 @@ fabric.properties
 .idea/**/azureSettings.xml
 
 # Daten
-raw_data/
-processed_data/
-*.jpg
-*.jpeg
-*.png
-*.bmp
-*.tiff
-*.mp4
-*.avi
-*.mov
-*.mkv
-*.wav
-*.mp3
-*.csv
-*.json
-*.xml
-*.yml
-*.yaml
+#raw_data/
+#processed_data/
+#*.jpg
+#*.jpeg
+#*.png
+#*.bmp
+#*.tiff
+#*.mp4
+#*.avi
+#*.mov
+#*.mkv
+#*.wav
+#*.mp3
+#*.csv
+#*.json
+#*.xml
+#*.yml
+#*.yaml
 
 # Log-Dateien
 *.log
