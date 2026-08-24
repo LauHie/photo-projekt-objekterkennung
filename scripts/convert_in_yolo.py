@@ -27,8 +27,8 @@ SUBFOLDER_PATH = [
 CLASS_TO_ID = {"scooter": 0}
 
 # Basis-Ordner für die Daten
-BASE_DATA_DIR = Path("C:/Studium_KI_Programme/Photo_Projekt_Objekterkennung/processed_data/images")
-BASE_LABELS_DIR = Path("C:/Studium_KI_Programme/Photo_Projekt_Objekterkennung/processed_data/labels")
+BASE_DATA_DIR = Path(__file__).parent.parent / "processed_data" / "images"
+BASE_LABELS_DIR = Path(__file__).parent.parent / "processed_data" / "labels"
 
 # ================== FUNKTIONEN ==================
 def list_folder(sub_dirs,base_dir):

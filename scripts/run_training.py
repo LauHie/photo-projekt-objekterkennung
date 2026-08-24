@@ -8,8 +8,8 @@ RED = "\033[31m"
 
 # ================== KONFIGURATION ==================
 def main():
-    CUSTOM_MODEL_YAML = Path(r"C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\yolov8-custom.yaml")
-    DATA_YAML = Path(r"C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\processed_data\data.yaml")
+    CUSTOM_MODEL_YAML = Path(__file__).parent.parent / "yolov8-custom.yaml"
+    DATA_YAML = Path(__file__).parent.parent / "processed_data" / "data.yaml"
     RUN_NAME = 'RUN_3'
 
     # ================== CHECKS ==================

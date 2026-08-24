@@ -4,8 +4,8 @@ from pathlib import Path
 import random
 
 # ================== ORDNERPFADE ==================
-RAW_DATA = "C:/Studium_KI_Programme/Photo_Projekt_Objekterkennung/raw_data"
-PROCESSED_DATA = "C:/Studium_KI_Programme/Photo_Projekt_Objekterkennung/processed_data/images"
+RAW_DATA = Path(__file__).parent.parent / "raw_data"
+PROCESSED_DATA = Path(__file__).parent.parent / "images"
 
 # Verhältnis: 70% train, 20% val, 10% test
 SPLIT_RATIOS = {

@@ -19,7 +19,7 @@ from pathlib import Path
 
 # ================== KONFIGURATION ==================
 # Pfade definieren
-BASE_DIR = Path("C:/Studium_KI_Programme/Photo_Projekt_Objekterkennung")
+BASE_DIR = Path(__file__).parent.parent
 VENV_PATH = BASE_DIR / ".venv"
 LABELME_PATH = VENV_PATH / "Scripts" / "labelme.exe"
 

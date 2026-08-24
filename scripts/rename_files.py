@@ -6,8 +6,8 @@ from pathlib import Path
 import sys
 
 # ================== ORDNERPFAD ==================
-FOLDER_PATH_FullVIEWS = r'C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\raw_data\full_views'
-FOLDER_PATH_NEGATIVES = r'C:\Studium_KI_Programme\Photo_Projekt_Objekterkennung\raw_data\negatives'
+FOLDER_PATH_FullVIEWS = Path(__file__).parent.parent / "raw_data" / "full_views"
+FOLDER_PATH_NEGATIVES = Path(__file__).parent.parent / "raw_data" / "negatives"
 
 
 # ================== FUNKTIONEN ==================
