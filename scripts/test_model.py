@@ -209,6 +209,5 @@ def main() -> None:
         print("\nProgramm beendet.")
 
 
-# --------------------------------------------------------------
 if __name__ == "__main__":
     main()
