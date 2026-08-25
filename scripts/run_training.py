@@ -1,3 +1,47 @@
+"""
+YOLOv8 Scooter Detection Training Script
+
+ZWECK:
+Dieses Skript trainiert ein YOLOv8-Modell zur Erkennung von Scootern in Bildern.
+Es verwendet einen benutzerdefinierten Datensatz (Scooter vs. Negative Beispiele) und
+optimierte Hyperparameter für eine NVIDIA GTX 1650 (4 GB VRAM).
+
+VORAUSSETZUNGEN:
+- PyTorch mit CUDA-Unterstützung (für GPU-Beschleunigung)
+- Ultralytics YOLOv8 (`pip install ultralytics`)
+- Vorhandene Dateien:
+  - `yolov8-custom.yaml`: Modellkonfiguration (1 Klasse: "scooter")
+  - `processed_data/data.yaml`: Datensatz-Konfiguration (Pfade zu Train/Val/Test)
+  - `processed_data/images/{train,val,test}/`: Bilddaten
+  - `processed_data/labels/{train,val,test}/`: YOLO-Annotationsdateien (.txt)
+
+FUNKTIONSWEISE:
+1. Lädt das YOLOv8-Modell aus der benutzerdefinierten YAML-Konfiguration.
+2. Führt ein Training mit folgenden Parametern durch:
+   - 120 Epochen
+   - Bildgröße: 640x640 (für 4 GB VRAM optimiert)
+   - Batch-Größe: 16
+   - AdamW-Optimierer mit Cosine-LR-Scheduler
+   - Daten-Augmentierung (Mosaic, Mixup, Rotation, Spiegelung, etc.)
+   - Loss-Gewichtung: Box (7.5), Klasse (0.5), DFL (1.5)
+3. Speichert das beste Modell in `runs/detect/RUN_3/weights/best.pt`.
+4. Gibt Metriken aus: mAP@0.5, mAP@0.5-0.95, Precision, Recall.
+
+AUSGABE:
+- Trainingslogs in `runs/detect/RUN_3/`
+- Modellgewichte (`best.pt`, `last.pt`)
+- Trainingsplots (Verluste, Metriken)
+- Konsolenausgabe mit finalen Metriken.
+
+HINWEISE:
+- Für GPUs mit < 4 GB VRAM: `batch` auf 8 oder 4 reduzieren.
+- Für bessere Genauigkeit: `imgsz` auf 1024 erhöhen (erfordert mehr VRAM).
+- `half=False` deaktiviert Mixed Precision (GTX 1650 unterstützt AMP nicht gut).
+
+BEISPIEL:
+    python train_model.py
+"""
+
 from ultralytics import YOLO
 from pathlib import Path
 import torch

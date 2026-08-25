@@ -1,9 +1,71 @@
 """
-Skript zum Testen eines trainierten YOLOv8‑Modells auf neuen Bildern.
-- Lädt ein trainiertes Modell aus einem Run‑Ordner.
-- Skaliert große Bilder (z.B. 2000×3000) mit Aspekt‑Erhaltung.
-- Führt Inferenz auf einem ausgewählten Bild durch.
-- Zeigt Erkennungen mit Matplotlib (vollständiges Bild) an.
+YOLOv8 Scooter Detection Test Script
+
+ZWECK:
+Dieses Skript ermöglicht das interaktive Testen eines trainierten YOLOv8-Modells
+auf neuen Bildern. Es ist speziell für die Erkennung von Scootern optimiert und
+bietet eine benutzerfreundliche Oberfläche zur Anpassung von Inferenz-Parametern.
+
+VORAUSSETZUNGEN:
+- PyTorch mit CUDA-Unterstützung (für GPU-Beschleunigung)
+- Ultralytics YOLOv8 (`pip install ultralytics`)
+- OpenCV (`pip install opencv-python`)
+- Matplotlib (`pip install matplotlib`)
+- Vorhandene Dateien:
+  - Trainiertes Modell in `runs/detect/<RUN_NAME>/weights/best.pt`
+  - Testbilder in `processed_data/images/test/scooter/` (Format: `scooter_XXX.jpg`)
+
+FUNKTIONSWEISE:
+1. **Modellauswahl:**
+   - Listet alle verfügbaren Trainingsläufe in `runs/detect/` auf.
+   - Lädt das ausgewählte Modell (`best.pt`).
+
+2. **Bildauswahl:**
+   - Zeigt alle verfügbaren Testbilder in `processed_data/images/test/scooter/` an.
+   - Lädt das ausgewählte Bild (erwartet Format: `scooter_XXX.jpg`).
+
+3. **Inferenz-Parameter:**
+   - **max_side:** Maximale Kantenlänge (z. B. 1024, 1280) für Letterbox-Resizing.
+     - Erhält das Seitenverhältnis des Originalbilds.
+     - Größere Werte verbessern die Erkennungsgenauigkeit, benötigen aber mehr VRAM.
+   - **conf_thr:** Confidence-Schwelle (0.0–1.0).
+     - Niedrigere Werte erhöhen die Empfindlichkeit (mehr Erkennungen, aber auch mehr False Positives).
+     - Höhere Werte reduzieren False Positives (weniger Erkennungen, aber präziser).
+
+4. **Inferenz & Visualisierung:**
+   - Führt die Objekterkennung auf dem Bild durch.
+   - Zeichnet Bounding-Boxes und Confidence-Werte direkt ins Bild.
+   - Zeigt das Ergebnis mit Matplotlib an (vollständiges Bild, skaliert für die Anzeige).
+   - Gibt detaillierte Infos zu jedem erkannten Objekt aus (Klasse, Confidence, Box-Koordinaten).
+
+5. **Interaktive Wiederholung:**
+   - Ermöglicht das Testen weiterer Bilder ohne Neustart des Skripts.
+
+AUSGABE:
+- Konsolenausgabe mit:
+  - Anzahl der erkannten Objekte.
+  - Details zu jedem Objekt (Klasse, Confidence, Bounding-Box-Koordinaten, Größe).
+  - Tipps zur Parameteranpassung, falls keine Objekte erkannt werden.
+- Grafische Anzeige des Bildes mit:
+  - Grüne Bounding-Boxes um erkannte Scooter.
+  - Beschriftung mit Klassenname und Confidence-Wert.
+
+HINWEISE:
+- **Für große Bilder (z. B. 2000×3000):**
+  - Verwende `max_side=1024` oder `1280` für bessere Erkennung kleiner Scooter.
+  - Höhere Werte erhöhen den VRAM-Verbrauch.
+- **Bei Doppeldetektionen:**
+  - Erhöhe die `conf_thr` (z. B. auf 0.5–0.7), um schwache Erkennungen zu filtern.
+- **Bei fehlenden Erkennungen:**
+  - Reduziere die `conf_thr` (z. B. auf 0.1–0.2).
+  - Erhöhe `max_side` (z. B. auf 1280).
+
+BEISPIEL:
+    python test_model.py
+    # 1. Wähle Modell (z. B. RUN_3)
+    # 2. Wähle Bild (z. B. scooter_618.jpg)
+    # 3. Passe Parameter an (z. B. max_side=1024, conf_thr=0.5)
+    # 4. Betrachte die Erkennungen im Matplotlib-Fenster
 """
 
 from pathlib import Path

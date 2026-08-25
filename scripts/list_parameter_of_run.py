@@ -1,3 +1,77 @@
+"""
+YOLOv8 Model Validation and Evaluation Script
+
+ZWECK:
+Dieses Skript ermöglicht die Auswahl eines trainierten YOLOv8-Modells,
+führt eine Validierung durch und gibt detaillierte Trainings- und
+Evaluierungsmetriken aus. Es dient zur Bewertung der Modellleistung nach dem Training.
+
+VORAUSSETZUNGEN:
+- PyTorch mit CUDA-Unterstützung (für GPU-Beschleunigung)
+- Ultralytics YOLOv8 (`pip install ultralytics`)
+- PyYAML (`pip install pyyaml`)
+- Vorhandene Trainingsläufe in `runs/detect/`
+- `processed_data/data.yaml` mit Datensatz-Konfiguration
+
+FUNKTIONSWEISE:
+1. **Auswahl des Trainingslaufs:**
+   - Listet alle verfügbaren Trainingsläufe in `runs/detect/` auf
+   - Lädt den ausgewählten Run (entweder durch Nummer oder Namen)
+
+2. **Anzeige der Trainingsparameter:**
+   - Liest die Trainingskonfiguration aus `args.yaml`
+   - Zeigt wichtige Parameter an:
+     - Modellarchitektur
+     - Datensatz
+     - Anzahl Epochen
+     - Batch-Größe
+     - Bildgröße
+     - Optimierer
+     - Lernrate
+     - Gerät (GPU/CPU)
+     - Vortrainiert (True/False)
+
+3. **Modellinformationen:**
+   - Lädt das beste Modell (`best.pt`) aus dem ausgewählten Run
+   - Zeigt eine Zusammenfassung der Modellarchitektur:
+     - Anzahl der Layers
+     - Anzahl der Parameter
+     - GFLOPs (Berechnungsaufwand)
+   - Zeigt die Modellgröße in MB an
+
+4. **Validierungsmetriken:**
+   - Führt eine Validierung auf dem Testdatensatz durch
+   - Berechnet und zeigt folgende Metriken:
+     - mAP@0.5 (Mean Average Precision bei IoU=0.5)
+     - mAP@0.5-0.95 (Mean Average Precision über verschiedene IoU-Schwellen)
+     - Precision (Genauigkeit der Erkennungen)
+     - Recall (Vollständigkeit der Erkennungen)
+
+5. **Klasseninformationen:**
+   - Zeigt die Anzahl der Klassen und deren Namen an
+   - Nützlich zur Überprüfung der Klassenkonfiguration
+
+AUSGABE:
+- Konsolenausgabe mit:
+  - Trainingsparametern des ausgewählten Runs
+  - Modellzusammenfassung (Layers, Parameter, GFLOPs)
+  - Modellgröße in MB
+  - Validierungsmetriken (mAP, Precision, Recall)
+  - Klasseninformationen
+
+HINWEISE:
+- Die Validierung verwendet die in `processed_data/data.yaml` definierte
+  Datensatzaufteilung (Train/Val/Test)
+- Für eine vollständige Evaluation sollte der Datensatz repräsentativ sein
+- Die Metriken werden auf dem Validierungs- oder Testset berechnet
+- Bei großen Modellen kann die Validierung einige Zeit in Anspruch nehmen
+
+BEISPIEL:
+    python validate_model.py
+    # 1. Wähle einen Trainingslauf aus (z. B. RUN_3)
+    # 2. Das Skript zeigt Trainingsparameter, Modellinfo und Metriken an
+"""
+
 import yaml
 from pathlib import Path
 from ultralytics import YOLO
