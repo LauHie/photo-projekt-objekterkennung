@@ -1,0 +1,15 @@
+# Core dependencies
+numpy>=1.22.0
+opencv-python>=4.5.5
+Pillow>=9.0.0
+matplotlib>=3.5.0
+
+# Ultralytics YOLOv8 (für Objekterkennung)
+ultralytics>=8.0.0
+
+# LabelMe (für Annotation von Bildern)
+labelme>=5.0.0
+
+# Optional: Für GPU-Unterstützung (CUDA)
+torch>=2.0.0
+torchvision>=0.15.0
