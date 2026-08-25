@@ -166,7 +166,7 @@ def main() -> None:
     if img_bgr is None:
         print("Bild konnte nicht geladen werden.")
         exit()
-    # OpenCV liefert BGR → für Matplotlib in RGB umwandeln
+
     img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
 
     height, width = img_rgb.shape[:2]
@@ -175,7 +175,7 @@ def main() -> None:
     # ================== 4. INFERENZ‑PARAMETER ==================
     print_section("INFERENZ‑PARAMETER")
 
-    # Maximale Kantenlänge (z.B. 1024 oder 1280) – wird intern letterboxed
+    # Maximale Kantenlänge – wird intern letterboxed
     max_side = get_user_input(
         "Maximale Kantenlänge (z.B. 1024, 1280)",
         default=1024,
@@ -198,7 +198,6 @@ def main() -> None:
     # ================== 5. INFERENZ DURCHFÜHREN ==================
     print_section("INFERENZ‑ERGEBNISSE")
 
-    # Hinweis: `imgsz` kann ein einzelner Integer sein → YOLO skaliert mit Letterbox
     results = model(
         test_img_path,
         conf=conf_thr,
@@ -222,7 +221,7 @@ def main() -> None:
 
         # Bounding‑Boxes einzeichnen
         for i, box in enumerate(result.boxes):
-            class_id = int(box.cls)                     # Klassen‑ID (bei dir immer 0)
+            class_id = int(box.cls)                     # Klassen‑ID hier immer 0
             class_name = model.names[class_id]           # Klassen‑Name („scooter“)
             confidence = box.conf.item()                 # Confidence‑Wert
             x1, y1, x2, y2 = map(int, box.xyxy[0].tolist())
@@ -233,7 +232,7 @@ def main() -> None:
             print(f"    Bounding Box: ({x1}, {y1}) → ({x2}, {y2})")
             print(f"    Breite: {x2-x1}px, Höhe: {y2-y1}px")
 
-            # Box und Label ins Bild malen (auf dem Original‑RGB‑Array)
+            # Box und Label ins Bild malen
             cv2.rectangle(img_rgb, (x1, y1), (x2, y2), (0, 255, 0), thickness=6, lineType=cv2.LINE_AA)
             cv2.putText(
                 img_rgb,
@@ -248,15 +247,14 @@ def main() -> None:
     # ================== 6. BILD MIT MATPLOTLIB ANZEIGEN ==================
     print_section("BILD ANZEIGEN (Matplotlib)")
 
-    # Optional: Bild für die Anzeige verkleinern, damit es in das Fenster passt.
-    # Wir ändern nur die Anzeige‑Größe, nicht die eigentlichen Pixel.
+    # Ändern nur die Anzeige‑Größe, nicht die eigentlichen Pixel.
     max_display_dim = 1200  # maximale Breite/Höhe in Pixel für das Fenster
     scale_disp = min(max_display_dim / width, max_display_dim / height, 1.0)
     disp_w, disp_h = int(width * scale_disp), int(height * scale_disp)
 
     plt.figure(figsize=(disp_w / 100, disp_h / 100))
     plt.imshow(img_rgb)
-    plt.axis("off")               # Achsen ausblenden
+    plt.axis("off")
     plt.title(f"Ergebnisse für {test_img_path.name}\n"
               f"Confidence={conf_thr}, max_side={max_side}")
     plt.tight_layout()
